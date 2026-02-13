@@ -19,9 +19,9 @@ const ScratchCard = ({
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const isDrawing = useRef(false);
   const [revealed, setRevealed] = useState(false);
-  const [sparkles, setSparkles] = useState<
-    { x: number; y: number; id: number }[]
-  >([]);
+  //   const [sparkles, setSparkles] = useState<
+  //     { x: number; y: number; id: number }[]
+  //   >([]);
   const sparkleId = useRef(0);
 
   useEffect(() => {
@@ -81,18 +81,18 @@ const ScratchCard = ({
 
       // Sparkle
       sparkleId.current++;
-      const rect = canvasRef.current?.getBoundingClientRect();
-      if (rect) {
-        const sx = (x / width) * rect.width + rect.left;
-        const sy = (y / height) * rect.height + rect.top;
-        setSparkles((prev) => [
-          ...prev.slice(-8),
-          { x: sx, y: sy, id: sparkleId.current },
-        ]);
-        setTimeout(() => {
-          setSparkles((prev) => prev.filter((s) => s.id !== sparkleId.current));
-        }, 600);
-      }
+      //   const rect = canvasRef.current?.getBoundingClientRect();
+      //   if (rect) {
+      //     const sx = (x / width) * rect.width + rect.left;
+      //     const sy = (y / height) * rect.height + rect.top;
+      //     setSparkles((prev) => [
+      //       ...prev.slice(-8),
+      //       { x: sx, y: sy, id: sparkleId.current },
+      //     ]);
+      //     setTimeout(() => {
+      //       setSparkles((prev) => prev.filter((s) => s.id !== sparkleId.current));
+      //     }, 600);
+      //   }
     },
     [width, height],
   );
