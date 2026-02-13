@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useMemo } from "react";
-import FloatingHearts from "./FloatingHearts";
+// import FloatingHearts from "./FloatingHearts";
 
 const confettiColors = [
   "hsl(340, 80%, 60%)",
