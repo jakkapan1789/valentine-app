@@ -62,7 +62,9 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-body);
+    /* font-family: var(--font-body); */
+    font-family: "Bitcount Ink", system-ui;
+    /* font-family: "Roboto", sans-serif; */
     overflow: hidden;
   }
 }

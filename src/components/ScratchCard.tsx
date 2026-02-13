@@ -31,18 +31,21 @@ const ScratchCard = ({
 
     // Draw overlay
     const grad = ctx.createLinearGradient(0, 0, width, height);
-    grad.addColorStop(0, "hsl(340, 80%, 75%)");
-    grad.addColorStop(0.5, "hsl(350, 70%, 70%)");
-    grad.addColorStop(1, "hsl(340, 60%, 80%)");
+    // grad.addColorStop(0, "hsl(340, 80%, 75%)");
+    // grad.addColorStop(0.5, "hsl(350, 70%, 70%)");
+    // grad.addColorStop(1, "hsl(340, 60%, 80%)");
+    grad.addColorStop(0, "hsla(340, 74%, 62%, 1.00)");
+    grad.addColorStop(0.5, "hsla(340, 64%, 62%, 1.00)");
+    grad.addColorStop(1, "hsla(340, 72%, 64%, 1.00)");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, width, height);
 
     // Draw hint text
-    ctx.fillStyle = "hsla(0, 0%, 100%, 0.7)";
+    ctx.fillStyle = "hsla(0, 0%, 100%, 0.70)";
     ctx.font = `bold ${Math.min(width, height) * 0.07}px 'Quicksand', sans-serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("✨ Scratch me! ✨", width / 2, height / 2);
+    // ctx.fillText(" Scratch me! ", width / 2, height / 2);
   }, [width, height]);
 
   const getPos = useCallback(
@@ -92,21 +95,6 @@ const ScratchCard = ({
     lastPoint.current = { x, y };
   }, []);
 
-  //   const scratch = useCallback(
-  //     (x: number, y: number) => {
-  //       const ctx = ctxRef.current;
-  //       if (!ctx) return;
-  //       ctx.globalCompositeOperation = "destination-out";
-  //       ctx.beginPath();
-  //       ctx.arc(x, y, 28, 0, Math.PI * 2);
-  //       ctx.fill();
-
-  //       // Sparkle
-  //       sparkleId.current++;
-  //     },
-  //     [width, height],
-  //   );
-
   const checkReveal = useCallback(() => {
     const ctx = ctxRef.current;
     if (!ctx || revealed) return;
@@ -122,12 +110,6 @@ const ScratchCard = ({
     }
   }, [width, height, revealThreshold, onReveal, revealed]);
 
-  //   const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
-  //     e.preventDefault();
-  //     isDrawing.current = true;
-  //     const pos = getPos(e);
-  //     scratch(pos.x, pos.y);
-  //   };
   const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     isDrawing.current = true;
@@ -143,10 +125,6 @@ const ScratchCard = ({
     scratch(pos.x, pos.y);
   };
 
-  //   const handleEnd = () => {
-  //     isDrawing.current = false;
-  //     checkReveal();
-  //   };
   const handleEnd = () => {
     isDrawing.current = false;
     lastPoint.current = null;
