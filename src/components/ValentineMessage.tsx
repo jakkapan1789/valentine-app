@@ -36,7 +36,7 @@ const ValentineMessage = () => {
           "linear-gradient(135deg, hsl(340, 60%, 92%), hsl(350, 80%, 88%), hsl(340, 80%, 94%))",
       }}
     >
-      <FloatingHearts count={30} />
+      {/* <FloatingHearts count={30} /> */}
 
       {/* Confetti */}
       {particles.map((p) => (
@@ -72,13 +72,13 @@ const ValentineMessage = () => {
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: "spring", stiffness: 180, damping: 14, delay: 0.3 }}
       >
-        <motion.div
+        {/* <motion.div
           className="text-6xl sm:text-8xl mb-6"
           animate={{ scale: [1, 1.15, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           ❤️✨
-        </motion.div>
+        </motion.div> */}
 
         <h1
           className="text-3xl sm:text-5xl font-bold mb-6"
@@ -87,7 +87,7 @@ const ValentineMessage = () => {
             color: "hsl(340, 80%, 45%)",
           }}
         >
-          Happy Valentine's Day, my love
+          Happy Valentine's Day
         </h1>
 
         <motion.div

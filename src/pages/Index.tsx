@@ -144,7 +144,7 @@ const Index = () => {
                   lineHeight: "1.8",
                 }}
               >
-                You are my Valentine.
+                Love you..
               </h1>
 
               <ScratchCard
