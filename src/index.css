@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Pacifico&display=swap"); */
+
+@layer base {
+  :root {
+    --background: 340 60% 96%;
+    --foreground: 340 30% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 340 30% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 340 30% 20%;
+
+    --primary: 340 80% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 340 40% 90%;
+    --secondary-foreground: 340 30% 30%;
+
+    --muted: 340 30% 92%;
+    --muted-foreground: 340 15% 50%;
+
+    --accent: 350 90% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 340 30% 88%;
+    --input: 340 30% 88%;
+    --ring: 340 80% 60%;
+
+    --radius: 1rem;
+
+    --valentine-pink: 340 80% 60%;
+    --valentine-rose: 350 90% 65%;
+    --valentine-blush: 340 60% 92%;
+    --valentine-cream: 30 60% 96%;
+    --valentine-red: 0 75% 55%;
+
+    /* --font-display: "Pacifico", cursive; */
+    /* --font-body: "Quicksand", sans-serif; */
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    overflow: hidden;
+  }
+}
+
+@keyframes float-heart {
+  0% {
+    transform: translateY(100vh) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-10vh) rotate(720deg) scale(1.2);
+    opacity: 0;
+  }
+}
+/* 
+.floating-heart {
+  animation: float-heart linear infinite;
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  color: hsl(var(--valentine-pink) / 0.3);
+} */
+
+.floating-heart {
+  animation: float-heart linear infinite;
+  animation-fill-mode: backwards; /* ⭐ สำคัญ */
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  color: hsl(var(--valentine-pink) / 0.3);
+}
