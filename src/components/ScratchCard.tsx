@@ -19,9 +19,7 @@ const ScratchCard = ({
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const isDrawing = useRef(false);
   const [revealed, setRevealed] = useState(false);
-  //   const [sparkles, setSparkles] = useState<
-  //     { x: number; y: number; id: number }[]
-  //   >([]);
+
   const sparkleId = useRef(0);
 
   useEffect(() => {
@@ -69,33 +67,45 @@ const ScratchCard = ({
     },
     [width, height],
   );
+  const lastPoint = useRef<{ x: number; y: number } | null>(null);
 
-  const scratch = useCallback(
-    (x: number, y: number) => {
-      const ctx = ctxRef.current;
-      if (!ctx) return;
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.beginPath();
-      ctx.arc(x, y, 28, 0, Math.PI * 2);
+  const scratch = useCallback((x: number, y: number) => {
+    const ctx = ctxRef.current;
+    if (!ctx) return;
+
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.lineWidth = 50; // ขนาด brush
+    ctx.lineCap = "round"; // หัวกลม
+    ctx.lineJoin = "round"; // ต่อเส้นเนียน
+
+    ctx.beginPath();
+
+    if (lastPoint.current) {
+      ctx.moveTo(lastPoint.current.x, lastPoint.current.y);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    } else {
+      ctx.arc(x, y, 25, 0, Math.PI * 2);
       ctx.fill();
+    }
 
-      // Sparkle
-      sparkleId.current++;
-      //   const rect = canvasRef.current?.getBoundingClientRect();
-      //   if (rect) {
-      //     const sx = (x / width) * rect.width + rect.left;
-      //     const sy = (y / height) * rect.height + rect.top;
-      //     setSparkles((prev) => [
-      //       ...prev.slice(-8),
-      //       { x: sx, y: sy, id: sparkleId.current },
-      //     ]);
-      //     setTimeout(() => {
-      //       setSparkles((prev) => prev.filter((s) => s.id !== sparkleId.current));
-      //     }, 600);
-      //   }
-    },
-    [width, height],
-  );
+    lastPoint.current = { x, y };
+  }, []);
+
+  //   const scratch = useCallback(
+  //     (x: number, y: number) => {
+  //       const ctx = ctxRef.current;
+  //       if (!ctx) return;
+  //       ctx.globalCompositeOperation = "destination-out";
+  //       ctx.beginPath();
+  //       ctx.arc(x, y, 28, 0, Math.PI * 2);
+  //       ctx.fill();
+
+  //       // Sparkle
+  //       sparkleId.current++;
+  //     },
+  //     [width, height],
+  //   );
 
   const checkReveal = useCallback(() => {
     const ctx = ctxRef.current;
@@ -112,10 +122,17 @@ const ScratchCard = ({
     }
   }, [width, height, revealThreshold, onReveal, revealed]);
 
+  //   const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
+  //     e.preventDefault();
+  //     isDrawing.current = true;
+  //     const pos = getPos(e);
+  //     scratch(pos.x, pos.y);
+  //   };
   const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     isDrawing.current = true;
     const pos = getPos(e);
+    lastPoint.current = pos;
     scratch(pos.x, pos.y);
   };
 
@@ -126,8 +143,13 @@ const ScratchCard = ({
     scratch(pos.x, pos.y);
   };
 
+  //   const handleEnd = () => {
+  //     isDrawing.current = false;
+  //     checkReveal();
+  //   };
   const handleEnd = () => {
     isDrawing.current = false;
+    lastPoint.current = null;
     checkReveal();
   };
 
@@ -157,19 +179,6 @@ const ScratchCard = ({
         onTouchEnd={handleEnd}
       />
       {/* Sparkles */}
-      {/* {sparkles.map((s) => (
-        <span
-          key={s.id}
-          className="fixed pointer-events-none text-xl animate-ping"
-          style={{
-            left: s.x - 10,
-            top: s.y - 10,
-            zIndex: 100,
-          }}
-        >
-          ✨
-        </span>
-      ))} */}
     </div>
   );
 };
