@@ -20,7 +20,7 @@ const ScratchCard = ({
   const isDrawing = useRef(false);
   const [revealed, setRevealed] = useState(false);
 
-  const sparkleId = useRef(0);
+  //   const sparkleId = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
